@@ -40,6 +40,19 @@
   .dl a{display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-size:14px;font-weight:650;
         color:#124a80;background:var(--soft);border:1px solid #cfe0f2;border-radius:9px;padding:10px 14px}
   .dl a:hover{background:#e2eefb}
+  .actions{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0 4px}
+  .actions button, .actions a{display:inline-flex;align-items:center;gap:8px;cursor:pointer;
+    font:inherit;font-size:14.5px;font-weight:700;border-radius:10px;padding:11px 16px;text-decoration:none;
+    border:1px solid #1b5e9e;background:#1b5e9e;color:#fff}
+  .actions a{background:#fff;color:#124a80;border-color:#cfe0f2}
+  .actions button:hover{background:#17507f}
+  .actions a:hover{background:#eef4fb}
+  .hint{border:1px solid #f2e0bd;background:#fdf4e3;border-radius:10px;padding:12px 15px;margin:14px 0;font-size:14.5px;color:#7a4800}
+  .hint a{color:#9a5b00;font-weight:700}
+  .direct{font-size:13.5px;color:var(--muted);margin:12px 0 0;word-break:break-all}
+  .direct code{background:#f3f6fa;border-radius:5px;padding:2px 6px;font-size:12.5px;color:#243449}
+  .direct button{font:inherit;font-size:12.5px;font-weight:700;color:#124a80;background:#eef4fb;
+    border:1px solid #cfe0f2;border-radius:7px;padding:4px 10px;cursor:pointer;margin-left:6px}
   .foot{margin-top:36px;padding-top:12px;border-top:1px solid var(--line);color:var(--muted);font-size:12.5px}
   @media (max-width:700px){.sheet{padding:24px 16px 40px}h1{font-size:23px}}
 </style>
@@ -56,6 +69,18 @@
     <source src="video/cours_ondes_sonores.mp4" type="video/mp4">
     Ton navigateur ne peut pas lire la vidéo — utilise l'audio ci-dessous.
   </video>
+
+  <div class="actions">
+    <button id="fs" type="button">⛶ Regarder en plein écran</button>
+    <a href="video/cours_ondes_sonores.mp4" target="_blank" rel="noopener">↗ Ouvrir la vidéo dans un onglet</a>
+  </div>
+
+  <div class="hint" id="hint" hidden>
+    Le plein écran (et le téléchargement) sont bloqués dans la petite fenêtre d'aperçu.
+    Clique sur <b>« Ouvrir la vidéo dans un onglet »</b>, ou copie le lien ci-dessous dans la barre d'adresse de ton navigateur.
+  </div>
+
+  <p class="direct">Lien direct de cette page : <code id="url">…</code><button id="copy" type="button">copier</button></p>
 
   <div class="dl">
     <a href="audio/cours_complet.mp3" download>⬇ Le cours entier en MP3 (13 min)</a>
@@ -79,6 +104,28 @@
 </div>
 
 <script>
+(function(){
+  const v = document.querySelector('video');
+  const hint = document.getElementById('hint');
+  // lien direct (origine réelle de la page, même dans un aperçu intégré)
+  try {
+    const url = location.origin + location.pathname;
+    document.getElementById('url').textContent = url;
+    document.getElementById('copy').onclick = async () => {
+      try { await navigator.clipboard.writeText(url); document.getElementById('copy').textContent = 'copié ✓'; }
+      catch(e) { prompt('Copie ce lien :', url); }
+    };
+  } catch(e) {}
+  document.getElementById('fs').onclick = async () => {
+    try {
+      if (v.webkitEnterFullscreen) { v.webkitEnterFullscreen(); }          // iPhone / iPad
+      else if (v.requestFullscreen) { await v.requestFullscreen(); }
+      else if (v.webkitRequestFullscreen) { v.webkitRequestFullscreen(); }
+      else { hint.hidden = false; }
+    } catch(e) { hint.hidden = false; }
+  };
+})();
+
 const chapitres = [
   ["01_introduction.mp3",         "Introduction et plan",                "0:47"],
   ["02_vocabulaire.mp3",          "Le vocabulaire de base",              "1:22"],
