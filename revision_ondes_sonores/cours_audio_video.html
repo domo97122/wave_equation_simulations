@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cours audio &amp; vidéo — Ondes sonores</title>
+<style>
+  :root{--ink:#16202e;--muted:#5c6b7f;--line:#dde5ee;--blue:#1b5e9e;--soft:#eef4fb;--gold:#b8860b}
+  *{box-sizing:border-box}
+  body{margin:0;background:#eef1f5;color:var(--ink);
+       font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+       font-size:16px;line-height:1.6}
+  .sheet{max-width:880px;margin:0 auto;background:#fff;padding:42px 46px 56px;
+         box-shadow:0 1px 2px rgba(20,30,50,.06),0 12px 40px rgba(20,30,50,.08)}
+  .kicker{font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--blue);font-weight:700;margin:0 0 8px}
+  h1{font-size:29px;line-height:1.2;margin:0 0 8px;font-weight:750;letter-spacing:-.01em}
+  .sub{color:var(--muted);margin:0 0 4px;font-size:15px}
+  .rule{height:3px;background:linear-gradient(90deg,var(--blue),#4aa3df 55%,transparent);border-radius:3px;margin:18px 0 24px}
+  .back{display:inline-block;font-size:13.5px;color:var(--blue);text-decoration:none;margin-bottom:16px}
+  .back:hover{text-decoration:underline}
+  video{width:100%;border-radius:12px;background:#0e1621;display:block;box-shadow:0 8px 24px rgba(15,30,50,.18)}
+  h2{font-size:18px;margin:34px 0 10px;font-weight:700}
+  .player{border:1px solid var(--line);border-radius:12px;padding:14px 16px;background:#fafbfd;margin:18px 0}
+  audio{width:100%}
+  .now{font-size:13.5px;color:var(--muted);margin:0 0 8px}
+  .now b{color:var(--ink)}
+  ol.ch{list-style:none;margin:8px 0 0;padding:0;border-top:1px solid var(--line)}
+  ol.ch li{display:flex;align-items:center;gap:12px;padding:10px 6px;border-bottom:1px solid var(--line);cursor:pointer}
+  ol.ch li:hover{background:var(--soft)}
+  ol.ch li.active{background:#e7f1fb}
+  .n{flex:0 0 26px;height:26px;border-radius:7px;background:#e8eef6;color:#39506b;font-size:12.5px;font-weight:800;
+     display:flex;align-items:center;justify-content:center}
+  ol.ch li.active .n{background:var(--blue);color:#fff}
+  .t{flex:1;font-size:14.8px}
+  .d{font-size:12.5px;color:var(--muted);font-variant-numeric:tabular-nums}
+  .play{font-size:12px;color:var(--blue);font-weight:700}
+  .tip{border:1px solid #cfe9df;background:#ecf7f2;border-radius:10px;padding:13px 16px;margin:20px 0 0;font-size:14.5px}
+  .tip b{color:#1d7a5f}
+  .dl{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0 0}
+  .dl a{display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-size:14px;font-weight:650;
+        color:#124a80;background:var(--soft);border:1px solid #cfe0f2;border-radius:9px;padding:10px 14px}
+  .dl a:hover{background:#e2eefb}
+  .foot{margin-top:36px;padding-top:12px;border-top:1px solid var(--line);color:var(--muted);font-size:12.5px}
+  @media (max-width:700px){.sheet{padding:24px 16px 40px}h1{font-size:23px}}
+</style>
+</head>
+<body>
+<div class="sheet">
+  <a class="back" href="index.html">← Retour à l'accueil des révisions</a>
+  <p class="kicker">EC53.1 · Cours audio &amp; vidéo</p>
+  <h1>Ondes sonores — le cours à écouter</h1>
+  <p class="sub">13 min 23 · 10 pistes · les formules défilent à l'écran pendant la voix.</p>
+  <div class="rule"></div>
+
+  <video controls preload="metadata" poster="video/poster.png" playsinline>
+    <source src="video/cours_ondes_sonores.mp4" type="video/mp4">
+    Ton navigateur ne peut pas lire la vidéo — utilise l'audio ci-dessous.
+  </video>
+
+  <div class="dl">
+    <a href="audio/cours_complet.mp3" download>⬇ Le cours entier en MP3 (13 min)</a>
+    <a href="video/cours_ondes_sonores.mp4" download>⬇ La vidéo (MP4, 12 Mo)</a>
+  </div>
+
+  <div class="player">
+    <p class="now">En écoute : <b id="titre">choisis une piste ci-dessous</b></p>
+    <audio id="lecteur" controls preload="none"></audio>
+    <ol class="ch" id="liste"></ol>
+  </div>
+
+  <div class="tip">
+    <b>Méthode d'écoute :</b> une première fois d'un bout à l'autre, sans rien faire d'autre. Puis une seconde fois en mettant en pause à chaque formule et en écrivant la formule sur une feuille — c'est l'écriture qui fixe la mémoire, pas la réécoute. Le soir, refais les TD en écoutant seulement les pistes 5 à 8.
+  </div>
+
+  <h2>La transcription</h2>
+  <p style="font-size:14.5px;color:#3b4c61">Le texte exact de l'audio est dans <a href="transcription_cours_audio.md">transcription_cours_audio.md</a> — utile pour vérifier une formule mal comprise à l'écoute.</p>
+
+  <p class="foot">Cours audio &amp; vidéo — Ondes sonores (EC53.1). Cours écrit : document 01 · Corrections : document 02 · Fiche : document 03.</p>
+</div>
+
+<script>
+const chapitres = [
+  ["01_introduction.mp3",         "Introduction et plan",                "0:47"],
+  ["02_vocabulaire.mp3",          "Le vocabulaire de base",              "1:22"],
+  ["03_fourier_serie.mp3",        "Fourier — la série",                  "1:35"],
+  ["04_fourier_transformee.mp3",  "Fourier — la transformée",            "1:16"],
+  ["05_corde_vibrante.mp3",       "La corde vibrante",                   "1:47"],
+  ["06_conditions_initiales.mp3", "Conditions initiales et musique",     "1:37"],
+  ["07_fluide.mp3",               "Propagation dans un fluide",          "1:40"],
+  ["08_energie_decibels.mp3",     "Énergie et décibels",                 "1:29"],
+  ["09_methode_pieges.mp3",       "Méthode et pièges",                   "1:22"],
+  ["10_conclusion.mp3",           "Conclusion",                          "0:29"]
+];
+const audio = document.getElementById('lecteur');
+const liste = document.getElementById('liste');
+const titre = document.getElementById('titre');
+
+chapitres.forEach(([f, nom, duree], i) => {
+  const li = document.createElement('li');
+  li.innerHTML = `<span class="n">${i+1}</span><span class="t">${nom}</span>` +
+                 `<span class="d">${duree}</span><span class="play">▶</span>`;
+  li.onclick = () => {
+    document.querySelectorAll('#liste li').forEach(x => x.classList.remove('active'));
+    li.classList.add('active');
+    titre.textContent = nom;
+    audio.src = 'audio/' + f;
+    audio.play();
+  };
+  liste.appendChild(li);
+});
+</script>
+</body>
+</html>
