@@ -26,13 +26,23 @@
   .card p{margin:0;font-size:14.3px;color:#3b4c61}
   .meta{margin-top:5px;font-size:12.5px;color:var(--muted)}
   .card .go{margin-left:auto;align-self:center;color:var(--blue);font-weight:700;font-size:14px;white-space:nowrap}
-  h3{font-size:14px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin:34px 0 8px}
-  ul{padding-left:20px;margin:8px 0}
-  li{margin:5px 0}
+  h2.sec{font-size:19px;margin:40px 0 6px;padding-bottom:7px;border-bottom:1.5px solid var(--line)}
+  h3{font-size:13px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin:26px 0 8px}
+  ul,ol{padding-left:22px;margin:8px 0}
+  li{margin:6px 0}
   .note{border:1px solid #cfe9df;background:#ecf7f2;border-radius:10px;padding:13px 16px;margin:22px 0 0;font-size:14.5px}
   .note strong{color:#1d7a5f}
+  .warn{border:1px solid #f2e0bd;background:#fdf4e3;border-radius:10px;padding:13px 16px;margin:18px 0;font-size:14.5px}
+  .warn strong{color:#9a5b00}
   code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.88em;background:#f3f6fa;padding:1px 5px;border-radius:4px}
-  @media print{body{background:#fff}.sheet{box-shadow:none;padding:0}a.card{break-inside:avoid}}
+  .dl{display:grid;gap:10px;margin:14px 0 4px}
+  a.btn{display:flex;align-items:center;gap:12px;text-decoration:none;
+        border:1px solid #cfe0f2;background:var(--soft);border-radius:10px;padding:12px 16px;
+        color:#124a80;font-weight:650;font-size:15px;transition:.15s}
+  a.btn:hover{background:#e2eefb;border-color:#a9c9e6}
+  a.btn .ic{font-size:17px}
+  a.btn small{display:block;font-weight:400;color:var(--muted);font-size:12.5px}
+  @media print{body{background:#fff}.sheet{box-shadow:none;padding:0}a.card{break-inside:avoid}.no-print{display:none}}
   @media (max-width:700px){.sheet{padding:26px 18px 40px}h1{font-size:23px}.card .go{display:none}}
 </style>
 </head>
@@ -40,7 +50,7 @@
 <div class="sheet">
   <p class="kicker">EC53.1 · Licence PC · Parcours PCA</p>
   <h1>Révision « Ondes sonores »</h1>
-  <p class="sub">Trois documents bâtis sur les TD 1 à 4 — clique sur un titre pour l'ouvrir.</p>
+  <p class="sub">Trois documents bâtis sur les TD 1 à 4 — clique sur un titre pour le lire, ou télécharge-le plus bas.</p>
   <div class="rule"></div>
 
   <a class="card" href="01_Cours_Ondes_Sonores.html">
@@ -50,7 +60,7 @@
       <p>Depuis zéro : vocabulaire des ondes, Fourier, cordes vibrantes, acoustique des fluides, énergie et décibels, puis la méthode d'évaluation et les erreurs classiques.</p>
       <div class="meta">≈ 40 min de lecture</div>
     </div>
-    <span class="go">Ouvrir →</span>
+    <span class="go">Lire →</span>
   </a>
 
   <a class="card" href="02_Corrections_TD_Ondes_Sonores.html">
@@ -60,7 +70,7 @@
       <p>Les 13 exercices entièrement rédigés : calculs intermédiaires, pièges signalés, et un tableau récapitulatif de tous les résultats à la fin.</p>
       <div class="meta">≈ 1 h 30 · à faire stylo en main</div>
     </div>
-    <span class="go">Ouvrir →</span>
+    <span class="go">Lire →</span>
   </a>
 
   <a class="card" href="03_Fiche_Revision_Ondes_Sonores.html">
@@ -70,15 +80,38 @@
       <p>Toutes les formules en tableaux, les 8 pièges qui coûtent des points, et un test flash de 10 questions-réponses.</p>
       <div class="meta">≈ 10 min · la veille et le matin</div>
     </div>
-    <span class="go">Ouvrir →</span>
+    <span class="go">Lire →</span>
   </a>
 
-  <h3>Pour une version papier ou PDF</h3>
-  <ul>
-    <li>Ouvre le document voulu, puis <code>Ctrl + P</code> (Windows) ou <code>Cmd + P</code> (Mac).</li>
+  <h2 class="sec">Enregistrer les fichiers sur mon appareil</h2>
+  <p style="margin-top:8px;font-size:14.8px">Clique sur un bouton : le fichier part directement dans ton dossier <strong>Téléchargements</strong>. Ensuite, un simple double-clic l'ouvre dans ton navigateur (Chrome, Safari, Firefox), même sans internet.</p>
+
+  <div class="dl no-print">
+    <a class="btn" href="01_Cours_Ondes_Sonores.html" download="01_Cours_Ondes_Sonores.html">
+      <span class="ic">⬇</span>
+      <span>1 · Cours complet<small>01_Cours_Ondes_Sonores.html</small></span>
+    </a>
+    <a class="btn" href="02_Corrections_TD_Ondes_Sonores.html" download="02_Corrections_TD_Ondes_Sonores.html">
+      <span class="ic">⬇</span>
+      <span>2 · Corrections des TD 1 à 4<small>02_Corrections_TD_Ondes_Sonores.html</small></span>
+    </a>
+    <a class="btn" href="03_Fiche_Revision_Ondes_Sonores.html" download="03_Fiche_Revision_Ondes_Sonores.html">
+      <span class="ic">⬇</span>
+      <span>3 · Fiche de révision<small>03_Fiche_Revision_Ondes_Sonores.html</small></span>
+    </a>
+  </div>
+
+  <div class="warn">
+    <strong>Sur téléphone :</strong> si le fichier s'ouvre au lieu de se télécharger, c'est parfait aussi — tu peux le lire directement. Pour l'avoir en PDF : bouton <em>Partager</em> → <em>Imprimer</em> → <em>Enregistrer en PDF</em>.
+  </div>
+
+  <h2 class="sec">Avoir une version papier ou PDF</h2>
+  <ol>
+    <li>Ouvre le document (clic sur un titre ci-dessus).</li>
+    <li>Appuie sur <code>Ctrl + P</code> — ou <code>Cmd + P</code> sur Mac.</li>
     <li>Choisis la destination <strong>« Enregistrer au format PDF »</strong>, format A4, marges par défaut.</li>
-    <li>La mise en page gère les sauts de page : les encadrés et les tableaux ne sont pas coupés.</li>
-  </ul>
+  </ol>
+  <p style="font-size:14.5px;color:#3b4c61">La mise en page est prévue pour l'impression : les encadrés et les tableaux ne sont jamais coupés en deux. C'est le moyen le plus fiable d'avoir une copie propre sur ton téléphone.</p>
 
   <div class="note">
     <strong>Astuce révision :</strong> lis d'abord le cours en entier, puis fais les corrections <em>sans regarder</em> — tu ne consultes la solution qu'après avoir cherché. Termine par la fiche, qui sert de dernier filet de sécurité.
