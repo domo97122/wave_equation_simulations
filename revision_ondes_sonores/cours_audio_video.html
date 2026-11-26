@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Cours audio &amp; vidéo — Ondes sonores</title>
 <style>
-  :root{--ink:#16202e;--muted:#5c6b7f;--line:#dde5ee;--blue:#1b5e9e;--soft:#eef4fb;--gold:#b8860b}
+  :root{--ink:#16202e;--muted:#5c6b7f;--line:#dde5ee;--blue:#1b5e9e;--soft:#eef4fb}
   *{box-sizing:border-box}
   body{margin:0;background:#eef1f5;color:var(--ink);
        font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
@@ -18,11 +18,32 @@
   .rule{height:3px;background:linear-gradient(90deg,var(--blue),#4aa3df 55%,transparent);border-radius:3px;margin:18px 0 24px}
   .back{display:inline-block;font-size:13.5px;color:var(--blue);text-decoration:none;margin-bottom:16px}
   .back:hover{text-decoration:underline}
-  video{width:100%;border-radius:12px;background:#0e1621;display:block;box-shadow:0 8px 24px rgba(15,30,50,.18)}
-  h2{font-size:18px;margin:34px 0 10px;font-weight:700}
-  .player{border:1px solid var(--line);border-radius:12px;padding:14px 16px;background:#fafbfd;margin:18px 0}
-  audio{width:100%}
-  .now{font-size:13.5px;color:var(--muted);margin:0 0 8px}
+
+  #cine{position:relative}
+  #cine video{width:100%;border-radius:12px;background:#0e1621;display:block;box-shadow:0 8px 24px rgba(15,30,50,.18)}
+  #cine.cinema{position:fixed;inset:0;z-index:99999;background:#000;display:flex;align-items:center;justify-content:center;border-radius:0}
+  #cine.cinema video{width:100%;height:100%;max-height:100vh;border-radius:0;box-shadow:none;object-fit:contain;background:#000}
+  #quitter{display:none;position:fixed;top:14px;right:14px;z-index:100000;font:inherit;font-size:14px;font-weight:700;
+           background:#fff;color:#16202e;border:0;border-radius:99px;padding:10px 16px;cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,.35)}
+  #cine.cinema ~ #quitter, #cine.cinema + #quitter{display:block}
+
+  .actions{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0 4px}
+  .actions button,.actions a{display:inline-flex;align-items:center;gap:8px;cursor:pointer;
+    font:inherit;font-size:14.5px;font-weight:700;border-radius:10px;padding:11px 16px;text-decoration:none;
+    border:1px solid #1b5e9e;background:#1b5e9e;color:#fff}
+  .actions a{background:#fff;color:#124a80;border-color:#cfe0f2}
+  .actions button:hover{background:#17507f}
+  .actions a:hover{background:#eef4fb}
+
+  .hint{border:1px solid #f2e0bd;background:#fdf4e3;border-radius:10px;padding:12px 15px;margin:14px 0;font-size:14.5px;color:#7a4800}
+  .hint b{color:#9a5b00}
+  .direct{font-size:13.5px;color:var(--muted);margin:12px 0 0;word-break:break-all}
+  .direct code{background:#f3f6fa;border-radius:5px;padding:2px 6px;font-size:12.5px;color:#243449}
+  .direct button{font:inherit;font-size:12.5px;font-weight:700;color:#124a80;background:#eef4fb;
+    border:1px solid #cfe0f2;border-radius:7px;padding:4px 10px;cursor:pointer;margin-left:6px}
+
+  h2{font-size:18px;margin:32px 0 10px;font-weight:700}
+  .now{font-size:13.5px;color:var(--muted);margin:16px 0 6px}
   .now b{color:var(--ink)}
   ol.ch{list-style:none;margin:8px 0 0;padding:0;border-top:1px solid var(--line)}
   ol.ch li{display:flex;align-items:center;gap:12px;padding:10px 6px;border-bottom:1px solid var(--line);cursor:pointer}
@@ -34,27 +55,14 @@
   .t{flex:1;font-size:14.8px}
   .d{font-size:12.5px;color:var(--muted);font-variant-numeric:tabular-nums}
   .play{font-size:12px;color:var(--blue);font-weight:700}
+
+  .player{border:1px solid var(--line);border-radius:12px;padding:14px 16px;background:#fafbfd;margin:18px 0}
+  audio{width:100%}
+
   .tip{border:1px solid #cfe9df;background:#ecf7f2;border-radius:10px;padding:13px 16px;margin:20px 0 0;font-size:14.5px}
   .tip b{color:#1d7a5f}
-  .dl{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0 0}
-  .dl a{display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-size:14px;font-weight:650;
-        color:#124a80;background:var(--soft);border:1px solid #cfe0f2;border-radius:9px;padding:10px 14px}
-  .dl a:hover{background:#e2eefb}
-  .actions{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0 4px}
-  .actions button, .actions a{display:inline-flex;align-items:center;gap:8px;cursor:pointer;
-    font:inherit;font-size:14.5px;font-weight:700;border-radius:10px;padding:11px 16px;text-decoration:none;
-    border:1px solid #1b5e9e;background:#1b5e9e;color:#fff}
-  .actions a{background:#fff;color:#124a80;border-color:#cfe0f2}
-  .actions button:hover{background:#17507f}
-  .actions a:hover{background:#eef4fb}
-  .hint{border:1px solid #f2e0bd;background:#fdf4e3;border-radius:10px;padding:12px 15px;margin:14px 0;font-size:14.5px;color:#7a4800}
-  .hint a{color:#9a5b00;font-weight:700}
-  .direct{font-size:13.5px;color:var(--muted);margin:12px 0 0;word-break:break-all}
-  .direct code{background:#f3f6fa;border-radius:5px;padding:2px 6px;font-size:12.5px;color:#243449}
-  .direct button{font:inherit;font-size:12.5px;font-weight:700;color:#124a80;background:#eef4fb;
-    border:1px solid #cfe0f2;border-radius:7px;padding:4px 10px;cursor:pointer;margin-left:6px}
   .foot{margin-top:36px;padding-top:12px;border-top:1px solid var(--line);color:var(--muted);font-size:12.5px}
-  @media (max-width:700px){.sheet{padding:24px 16px 40px}h1{font-size:23px}}
+  @media (max-width:700px){.sheet{padding:22px 14px 40px}h1{font-size:22px}.actions button,.actions a{font-size:13.5px;padding:10px 12px}}
 </style>
 </head>
 <body>
@@ -62,98 +70,141 @@
   <a class="back" href="index.html">← Retour à l'accueil des révisions</a>
   <p class="kicker">EC53.1 · Cours audio &amp; vidéo</p>
   <h1>Ondes sonores — le cours à écouter</h1>
-  <p class="sub">13 min 23 · 10 pistes · les formules défilent à l'écran pendant la voix.</p>
+  <p class="sub">13 min 23 · 10 chapitres · les formules défilent pendant la voix.</p>
   <div class="rule"></div>
 
-  <video controls preload="metadata" poster="video/poster.png" playsinline>
-    <source src="video/cours_ondes_sonores.mp4" type="video/mp4">
-    Ton navigateur ne peut pas lire la vidéo — utilise l'audio ci-dessous.
-  </video>
+  <div id="cine">
+    <video id="v" controls preload="metadata" poster="video/poster.png" playsinline
+           src="video/chapitre_01.mp4"></video>
+  </div>
+  <button id="quitter" type="button">✕ Quitter le mode cinéma</button>
 
   <div class="actions">
-    <button id="fs" type="button">⛶ Regarder en plein écran</button>
-    <a href="video/cours_ondes_sonores.mp4" target="_blank" rel="noopener">↗ Ouvrir la vidéo dans un onglet</a>
+    <button id="bt-cinema" type="button">🎬 Mode cinéma</button>
+    <button id="bt-fs" type="button">⛶ Plein écran</button>
+    <a href="video/cours_ondes_sonores.mp4" target="_blank" rel="noopener">↗ Ouvrir dans un onglet</a>
+    <a href="video/cours_ondes_sonores.mp4" download>⬇ Vidéo complète (12 Mo)</a>
   </div>
 
   <div class="hint" id="hint" hidden>
-    Le plein écran (et le téléchargement) sont bloqués dans la petite fenêtre d'aperçu.
-    Clique sur <b>« Ouvrir la vidéo dans un onglet »</b>, ou copie le lien ci-dessous dans la barre d'adresse de ton navigateur.
+    <b>Le plein écran est bloqué dans cette fenêtre d'aperçu</b> (c'est une sécurité du navigateur).
+    Utilise <b>🎬 Mode cinéma</b> : la vidéo remplit toute la fenêtre sans avoir besoin de l'autorisation du navigateur.
+    Pour le vrai plein écran, ouvre la page dans un onglet avec le lien ci-dessous.
   </div>
 
   <p class="direct">Lien direct de cette page : <code id="url">…</code><button id="copy" type="button">copier</button></p>
 
-  <div class="dl">
-    <a href="audio/cours_complet.mp3" download>⬇ Le cours entier en MP3 (13 min)</a>
-    <a href="video/cours_ondes_sonores.mp4" download>⬇ La vidéo (MP4, 12 Mo)</a>
-  </div>
+  <p class="now">Chapitre en cours : <b id="titre">1 · Introduction et plan</b> <span id="etat"></span></p>
+  <ol class="ch" id="liste-video"></ol>
 
+  <h2>Écouter seulement (plus léger)</h2>
   <div class="player">
-    <p class="now">En écoute : <b id="titre">choisis une piste ci-dessous</b></p>
     <audio id="lecteur" controls preload="none"></audio>
-    <ol class="ch" id="liste"></ol>
+    <ol class="ch" id="liste-audio"></ol>
   </div>
+  <p class="direct">Le cours entier en un fichier : <a href="audio/cours_complet.mp3" download>cours_complet.mp3 (13 min, 7,9 Mo)</a></p>
 
   <div class="tip">
-    <b>Méthode d'écoute :</b> une première fois d'un bout à l'autre, sans rien faire d'autre. Puis une seconde fois en mettant en pause à chaque formule et en écrivant la formule sur une feuille — c'est l'écriture qui fixe la mémoire, pas la réécoute. Le soir, refais les TD en écoutant seulement les pistes 5 à 8.
+    <b>Méthode d'écoute :</b> une première fois d'un bout à l'autre, sans rien faire d'autre. Puis une seconde fois en mettant en pause à chaque formule et en l'écrivant sur une feuille. Le soir, refais les TD en écoutant seulement les chapitres 5 à 8 (corde, conditions initiales, fluide, énergie).
   </div>
 
-  <h2>La transcription</h2>
-  <p style="font-size:14.5px;color:#3b4c61">Le texte exact de l'audio est dans <a href="transcription_cours_audio.md">transcription_cours_audio.md</a> — utile pour vérifier une formule mal comprise à l'écoute.</p>
-
-  <p class="foot">Cours audio &amp; vidéo — Ondes sonores (EC53.1). Cours écrit : document 01 · Corrections : document 02 · Fiche : document 03.</p>
+  <p class="foot">Cours audio &amp; vidéo — Ondes sonores (EC53.1). Transcription : <a href="transcription_cours_audio.md">transcription_cours_audio.md</a> · Cours écrit : document 01 · Corrections : document 02 · Fiche : document 03.</p>
 </div>
 
 <script>
-(function(){
-  const v = document.querySelector('video');
-  const hint = document.getElementById('hint');
-  // lien direct (origine réelle de la page, même dans un aperçu intégré)
-  try {
-    const url = location.origin + location.pathname;
-    document.getElementById('url').textContent = url;
-    document.getElementById('copy').onclick = async () => {
-      try { await navigator.clipboard.writeText(url); document.getElementById('copy').textContent = 'copié ✓'; }
-      catch(e) { prompt('Copie ce lien :', url); }
-    };
-  } catch(e) {}
-  document.getElementById('fs').onclick = async () => {
-    try {
-      if (v.webkitEnterFullscreen) { v.webkitEnterFullscreen(); }          // iPhone / iPad
-      else if (v.requestFullscreen) { await v.requestFullscreen(); }
-      else if (v.webkitRequestFullscreen) { v.webkitRequestFullscreen(); }
-      else { hint.hidden = false; }
-    } catch(e) { hint.hidden = false; }
-  };
-})();
-
 const chapitres = [
-  ["01_introduction.mp3",         "Introduction et plan",                "0:47"],
-  ["02_vocabulaire.mp3",          "Le vocabulaire de base",              "1:22"],
-  ["03_fourier_serie.mp3",        "Fourier — la série",                  "1:35"],
-  ["04_fourier_transformee.mp3",  "Fourier — la transformée",            "1:16"],
-  ["05_corde_vibrante.mp3",       "La corde vibrante",                   "1:47"],
-  ["06_conditions_initiales.mp3", "Conditions initiales et musique",     "1:37"],
-  ["07_fluide.mp3",               "Propagation dans un fluide",          "1:40"],
-  ["08_energie_decibels.mp3",     "Énergie et décibels",                 "1:29"],
-  ["09_methode_pieges.mp3",       "Méthode et pièges",                   "1:22"],
-  ["10_conclusion.mp3",           "Conclusion",                          "0:29"]
+  { f:"01_introduction.mp3",         v:"chapitre_01.mp4", nom:"Introduction et plan",            d:"0:47" },
+  { f:"02_vocabulaire.mp3",          v:"chapitre_02.mp4", nom:"Le vocabulaire de base",           d:"1:22" },
+  { f:"03_fourier_serie.mp3",        v:"chapitre_03.mp4", nom:"Fourier — la série",               d:"1:35" },
+  { f:"04_fourier_transformee.mp3",  v:"chapitre_04.mp4", nom:"Fourier — la transformée",         d:"1:16" },
+  { f:"05_corde_vibrante.mp3",       v:"chapitre_05.mp4", nom:"La corde vibrante",                d:"1:47" },
+  { f:"06_conditions_initiales.mp3", v:"chapitre_06.mp4", nom:"Conditions initiales et musique",  d:"1:37" },
+  { f:"07_fluide.mp3",               v:"chapitre_07.mp4", nom:"Propagation dans un fluide",       d:"1:40" },
+  { f:"08_energie_decibels.mp3",     v:"chapitre_08.mp4", nom:"Énergie et décibels",              d:"1:29" },
+  { f:"09_methode_pieges.mp3",       v:"chapitre_09.mp4", nom:"Méthode et pièges",                d:"1:22" },
+  { f:"10_conclusion.mp3",           v:"chapitre_10.mp4", nom:"Conclusion",                       d:"0:29" }
 ];
-const audio = document.getElementById('lecteur');
-const liste = document.getElementById('liste');
-const titre = document.getElementById('titre');
 
-chapitres.forEach(([f, nom, duree], i) => {
-  const li = document.createElement('li');
-  li.innerHTML = `<span class="n">${i+1}</span><span class="t">${nom}</span>` +
-                 `<span class="d">${duree}</span><span class="play">▶</span>`;
-  li.onclick = () => {
-    document.querySelectorAll('#liste li').forEach(x => x.classList.remove('active'));
-    li.classList.add('active');
-    titre.textContent = nom;
-    audio.src = 'audio/' + f;
-    audio.play();
+const v = document.getElementById('v');
+const cine = document.getElementById('cine');
+const titreV = document.getElementById('titre');
+const etat = document.getElementById('etat');
+const audio = document.getElementById('lecteur');
+let courant = 0;
+
+function listeHTML(el, prefixe, icone){
+  chapitres.forEach((c, i) => {
+    const li = document.createElement('li');
+    li.innerHTML = `<span class="n">${i+1}</span><span class="t">${c.nom}</span>` +
+                   `<span class="d">${c.d}</span><span class="play">▶</span>`;
+    li.onclick = () => { if (prefixe === 'video/') jouerVideo(i); else jouerAudio(i); };
+    el.appendChild(li);
+  });
+}
+listeHTML(document.getElementById('liste-video'));
+listeHTML(document.getElementById('liste-audio'));
+
+function surligne(i){
+  document.querySelectorAll('ol.ch li').forEach(l => l.classList.remove('active'));
+  document.querySelectorAll('#liste-video li')[i].classList.add('active');
+  document.querySelectorAll('#liste-audio li')[i].classList.add('active');
+}
+
+function jouerVideo(i){
+  courant = i;
+  v.src = 'video/' + chapitres[i].v;
+  v.play().catch(() => {});
+  titreV.textContent = (i+1) + ' · ' + chapitres[i].nom;
+  surligne(i);
+}
+function jouerAudio(i){
+  audio.src = 'audio/' + chapitres[i].f;
+  audio.play().catch(() => {});
+  surligne(i);
+  titreV.textContent = (i+1) + ' · ' + chapitres[i].nom;
+}
+v.addEventListener('ended', () => { if (courant < chapitres.length - 1) jouerVideo(courant + 1); });
+
+/* --- plein écran : tentative, sinon mode cinéma --- */
+function cinemamode(on){
+  cine.classList.toggle('cinema', on);
+  document.body.style.overflow = on ? 'hidden' : '';
+  if (on && v.webkitEnterFullscreen && !document.fullscreenElement) { /* iOS : lecteur natif */ }
+}
+document.getElementById('bt-cinema').onclick = () => {
+  cinemamode(!cine.classList.contains('cinema'));
+  if (cine.classList.contains('cinema')) v.play().catch(() => {});
+};
+document.getElementById('quitter').onclick = () => cinemamode(false);
+document.addEventListener('keydown', e => { if (e.key === 'Escape') cinemamode(false); });
+
+document.getElementById('bt-fs').onclick = async () => {
+  try {
+    if (v.webkitEnterFullscreen) { v.webkitEnterFullscreen(); }          // iPhone / iPad
+    else if (v.requestFullscreen) { await v.requestFullscreen(); }
+    else if (v.webkitRequestFullscreen) { v.webkitRequestFullscreen(); }
+    else { document.getElementById('hint').hidden = false; cinemamode(true); }
+  } catch (e) {
+    document.getElementById('hint').hidden = false;
+    cinemamode(true);
+  }
+};
+v.addEventListener('fullscreenchange', () => { if (!document.fullscreenElement) { /* rien */ } });
+if (!document.fullscreenEnabled) document.getElementById('hint').hidden = false;
+
+/* --- lien direct copiable --- */
+try {
+  const url = location.origin + location.pathname;
+  document.getElementById('url').textContent = url;
+  document.getElementById('copy').onclick = async () => {
+    try { await navigator.clipboard.writeText(url); document.getElementById('copy').textContent = 'copié ✓'; }
+    catch (e) { prompt('Copie ce lien :', url); }
   };
-  liste.appendChild(li);
+} catch (e) { document.getElementById('url').textContent = '—'; }
+
+/* --- erreur de lecture : message explicite --- */
+v.addEventListener('error', () => {
+  etat.textContent = '⚠️ la vidéo n\'a pas pu se charger — essaie « Ouvrir dans un onglet »';
 });
 </script>
 </body>
