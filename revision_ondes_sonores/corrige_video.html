@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Corrigé vidéo — TD 1 à 4 Ondes sonores</title>
+<style>
+  :root{--ink:#16202e;--muted:#5c6b7f;--line:#dde5ee;--blue:#1b5e9e;--soft:#eef4fb;--green:#1d7a5f;--green-soft:#ecf7f2}
+  *{box-sizing:border-box}
+  body{margin:0;background:#eef1f5;color:var(--ink);
+       font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+       font-size:16px;line-height:1.6}
+  .sheet{max-width:900px;margin:0 auto;background:#fff;padding:42px 46px 56px;
+         box-shadow:0 1px 2px rgba(20,30,50,.06),0 12px 40px rgba(20,30,50,.08)}
+  .kicker{font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--green);font-weight:700;margin:0 0 8px}
+  h1{font-size:29px;line-height:1.2;margin:0 0 8px;font-weight:750;letter-spacing:-.01em}
+  .sub{color:var(--muted);margin:0 0 4px;font-size:15px}
+  .rule{height:3px;background:linear-gradient(90deg,#1d7a5f,#4ad3a4 55%,transparent);border-radius:3px;margin:18px 0 24px}
+  .back{display:inline-block;font-size:13.5px;color:var(--blue);text-decoration:none;margin-bottom:16px}
+  .back:hover{text-decoration:underline}
+
+  #cine{position:relative}
+  #cine video{width:100%;border-radius:12px;background:#0e1621;display:block;box-shadow:0 8px 24px rgba(15,30,50,.18)}
+  #cine.cinema{position:fixed;inset:0;z-index:99999;background:#000;display:flex;align-items:center;justify-content:center}
+  #cine.cinema video{width:100%;height:100%;object-fit:contain;border-radius:0;box-shadow:none;background:#000}
+  #quitter{display:none;position:fixed;top:14px;right:14px;z-index:100000;font:inherit;font-size:14px;font-weight:700;
+           background:#fff;color:#16202e;border:0;border-radius:99px;padding:10px 16px;cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,.35)}
+  #cine.cinema ~ #quitter{display:block}
+
+  .actions{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0 6px}
+  .actions button,.actions a{display:inline-flex;align-items:center;gap:8px;cursor:pointer;
+    font:inherit;font-size:14.5px;font-weight:700;border-radius:10px;padding:11px 16px;text-decoration:none;
+    border:1px solid #1d7a5f;background:#1d7a5f;color:#fff}
+  .actions a{background:#fff;color:#14614a;border-color:#cfe9df}
+  .actions button:hover{background:#166049}
+  .actions a:hover{background:var(--green-soft)}
+
+  .hint{border:1px solid #f2e0bd;background:#fdf4e3;border-radius:10px;padding:12px 15px;margin:14px 0;font-size:14.3px;color:#7a4800}
+  .hint b{color:#9a5b00}
+
+  h2{font-size:18px;margin:30px 0 10px;font-weight:700}
+  .chips{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:6px 0 0}
+  .chip{display:flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:10px;
+        padding:10px 12px;background:#fafbfd;cursor:pointer;font-size:14.2px;text-align:left;width:100%}
+  .chip:hover{background:var(--soft);border-color:#bcd6ee}
+  .chip.active{background:var(--green-soft);border-color:#a9d9c8}
+  .chip .n{flex:0 0 24px;height:24px;border-radius:6px;background:#e8eef6;color:#39506b;font-size:12px;font-weight:800;
+           display:flex;align-items:center;justify-content:center}
+  .chip.active .n{background:#1d7a5f;color:#fff}
+  .chip .d{margin-left:auto;color:var(--muted);font-size:12px;font-variant-numeric:tabular-nums}
+  .chip .l{flex:1}
+
+  .tip{border:1px solid #cfe9df;background:var(--green-soft);border-radius:10px;padding:13px 16px;margin:22px 0 0;font-size:14.5px}
+  .tip b{color:var(--green)}
+  .foot{margin-top:34px;padding-top:12px;border-top:1px solid var(--line);color:var(--muted);font-size:12.5px}
+  @media (max-width:700px){.sheet{padding:22px 14px 40px}h1{font-size:22px}.chips{grid-template-columns:1fr}
+    .actions button,.actions a{font-size:13.5px;padding:10px 12px}}
+</style>
+</head>
+<body>
+<div class="sheet">
+  <a class="back" href="index.html">← Retour à l'accueil des révisions</a>
+  <p class="kicker">EC53.1 · Corrigé vidéo</p>
+  <h1>Les 13 exercices corrigés en vidéo</h1>
+  <p class="sub">12 min 27 · TD 1 à 4 · chaque exercice avec sa méthode, son calcul et son résultat encadré.</p>
+  <div class="rule"></div>
+
+  <div id="cine">
+    <video id="v" controls preload="metadata" poster="corrige_video/poster.png"
+           src="corrige_video/corrige_ondes_sonores.mp4" playsinline></video>
+  </div>
+  <button id="quitter" type="button">✕ Quitter le mode cinéma</button>
+
+  <div class="actions">
+    <button id="bt-cinema" type="button">🎬 Mode cinéma</button>
+    <button id="bt-fs" type="button">⛶ Plein écran</button>
+    <a href="corrige_video/corrige_ondes_sonores.mp4" target="_blank" rel="noopener">↗ Ouvrir dans un onglet</a>
+  </div>
+
+  <div class="hint">
+    <b>Plein écran ou téléchargement bloqués ?</b> C'est la sécurité de la fenêtre d'aperçu. Utilise <b>🎬 Mode cinéma</b>,
+    ou <b>clic droit → « Enregistrer la cible du lien sous… »</b> sur le lien « Ouvrir dans un onglet ».
+  </div>
+
+  <h2>Aller directement à un exercice</h2>
+  <div class="chips" id="chips"></div>
+
+  <div class="tip">
+    <b>Comment travailler avec ce corrigé :</b> mets en pause avant chaque résultat, prends une feuille, refais l'exercice,
+    puis compare avec le « RÉSULTAT » affiché. Si tu bloques plus de deux minutes, écoute la méthode et recommence.
+    Les exercices les plus « rentables » pour demain : TD2 ex. 2 et 3 (conditions initiales) et TD4 ex. 1 et 3 (numérique).
+  </div>
+
+  <p class="foot">Corrigé vidéo — Ondes sonores (EC53.1). Version écrite détaillée : document 02 · Cours : document 01 · Fiche : document 03.
+  Transcription : <a href="transcription_corrige_video.md">transcription_corrige_video.md</a></p>
+</div>
+
+<script>
+const chapitres = [
+  { t:0,      nom:"Méthode de correction",            d:"0:52" },
+  { t:51.9,   nom:"TD1 · Ex 1 — Série de Fourier",     d:"1:22" },
+  { t:133.98, nom:"TD1 · Ex 3 — Corde pincée",         d:"1:07" },
+  { t:200.86, nom:"TD1 · Ex 2 et 4 — Transformées",    d:"1:21" },
+  { t:282.33, nom:"TD2 · Ex 1 — Modes stationnaires",  d:"1:21" },
+  { t:363.2,  nom:"TD2 · Ex 2 — Clavecin",             d:"1:06" },
+  { t:429.15, nom:"TD2 · Ex 3 — Piano",                d:"1:17" },
+  { t:506.06, nom:"TD2 · Ex 4 — Violon",               d:"1:16" },
+  { t:581.99, nom:"TD3 — Propagation dans un fluide",  d:"1:20" },
+  { t:661.83, nom:"TD4 — Énergie et décibels",         d:"1:25" }
+];
+
+const v = document.getElementById('v');
+const cine = document.getElementById('cine');
+const chips = document.getElementById('chips');
+
+chapitres.forEach((c, i) => {
+  const b = document.createElement('button');
+  b.type = 'button';
+  b.className = 'chip';
+  b.innerHTML = `<span class="n">${i+1}</span><span class="l">${c.nom}</span><span class="d">${c.d}</span>`;
+  b.onclick = () => { v.currentTime = c.t + 0.15; v.play().catch(()=>{}); };
+  chips.appendChild(b);
+});
+
+v.addEventListener('timeupdate', () => {
+  let idx = 0;
+  chapitres.forEach((c, i) => { if (v.currentTime >= c.t - 0.5) idx = i; });
+  document.querySelectorAll('.chip').forEach((el, i) => el.classList.toggle('active', i === idx));
+});
+
+function cinema(on){
+  cine.classList.toggle('cinema', on);
+  document.body.style.overflow = on ? 'hidden' : '';
+  if (on) v.play().catch(()=>{});
+}
+document.getElementById('bt-cinema').onclick = () => cinema(!cine.classList.contains('cinema'));
+document.getElementById('quitter').onclick = () => cinema(false);
+document.addEventListener('keydown', e => { if (e.key === 'Escape') cinema(false); });
+
+document.getElementById('bt-fs').onclick = async () => {
+  try {
+    if (v.webkitEnterFTML) { v.webkitEnterFTML(); }
+    else if (v.webkitEnterFullscreen) { v.webkitEnterFullscreen(); }
+    else if (v.requestFullscreen) { await v.requestFullscreen(); }
+    else { cinema(true); }
+  } catch (e) { cinema(true); }
+};
+v.addEventListener('error', () => { v.poster = ''; alert("La vidéo n'a pas pu se charger. Essaie « Ouvrir dans un onglet »."); });
+</script>
+</body>
+</html>

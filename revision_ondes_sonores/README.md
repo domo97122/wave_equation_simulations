@@ -8,8 +8,9 @@ Dossier de révision construit à partir des énoncés de TD 1 à 4 (Fourier, co
 | `02_Corrections_TD_Ondes_Sonores.html` | Les 13 exercices des TD 1 à 4 entièrement corrigés, avec calculs intermédiaires, pièges signalés et tableau récapitulatif des résultats. | ~1 h 30 |
 | `03_Fiche_Revision_Ondes_Sonores.html` | La fiche mémo : toutes les formules, les 8 pièges, un test flash de 10 questions. | ~10 min, à relire la veille |
 | `cours_audio_video.html` | Le cours audio (10 pistes, 13 min) et sa version vidéo avec les formules à l'écran. Transcription dans `transcription_cours_audio.md`. | ~13 min, à écouter |
+| `corrige_video.html` | Le corrigé vidéo des 13 exercices (12 min 27) : méthode, calcul et résultat encadré pour chacun, avec accès direct à un exercice. Transcription dans `transcription_corrige_video.md`. | ~12 min, après avoir cherché |
 
-Fichiers médias : `audio/cours_complet.mp3` (le cours entier), `audio/01_…` à `audio/10_…` (piste par piste), `video/cours_ondes_sonores.mp4` (1280×720, H.264/AAC).
+Fichiers médias : `audio/cours_complet.mp3` (le cours entier), `audio/01_…` à `audio/10_…` (piste par piste), `video/cours_ondes_sonores.mp4` et `corrige_video/corrige_ondes_sonores.mp4` (1280×720, H.264/AAC).
 
 `index.html` sert de page d'accueil : elle permet d'ouvrir, d'écouter et de télécharger chaque document, et donne la marche à suivre pour l'impression (bouton « Imprimer / PDF » présent dans chaque document).
 
